@@ -1,0 +1,25 @@
+version: '24.0.7'
+
+services:
+  web:
+    build: .
+    command: python /code/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - "DJANGO_SECRET_KEY=django-insecure-b764$$#(&o4o((cvy!z^nsseq5@erq#e^0%5r5a(%c24*f^*sde"
+      - "DJANGO_DEBUG=True"
+
+
+  db:
+    image: postgres:16
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+
+
+# depends on = چون اول دیتابیس بالا میاد بخاطر همین با تعریف این متغیر دیتابیس معلوم میشه که این وب وابسته به این دیتابیس هس
+#هددف سیکرت کی یه دالر $ وجود دارد که یک
